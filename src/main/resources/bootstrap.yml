@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: api-gateway
+  
+#CONFIG SERVER FETCH GIT
+  cloud:
+    config:
+      #enabled: true
+      uri: http://localhost:8888
+      username: nttdata
+      password: qwerty
+
+#RUTAS
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: service-customer
+        #uri: lb://service-customer
+        uri: http://localhost:8080
+        predicates:
+        - Path=/api/v1/customer/**
+      - id: service-profile
+        #uri: lb://service-profile
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/profile/typecustomer/**
+      - id: service-profile
+        #uri: lb://service-profile
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/profile/subtype/**
+  
