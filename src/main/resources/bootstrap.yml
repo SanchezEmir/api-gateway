@@ -16,19 +16,20 @@ spring:
         locator:
           enabled: true
       routes:
-      - id: service-customer
+      - id: ms1-customer
         #uri: lb://service-customer
         uri: http://localhost:8080
         predicates:
-        - Path=/api/v1/customer/**
-      - id: service-profile
+        - Path=/api/ms1/**
+        #localhost:8090/api/v1/customer -> asi buscará el api en eureka y resolverá en el ms customer.
+        filters:
+        - RewritePath=/api/ms1/(?<x>.*), /$\{x}
+      - id: ms2-profile
         #uri: lb://service-profile
         uri: http://localhost:8081
         predicates:
-        - Path=/api/v1/profile/typecustomer/**
-      - id: service-profile
-        #uri: lb://service-profile
-        uri: http://localhost:8081
-        predicates:
-        - Path=/api/v1/profile/subtype/**
-  
+        - Path=/api/ms2/**
+        #localhost:8090/api/v1/typecustomer
+        #localhost:8090/api/v1/subtype
+        filters:
+        - RewritePath=/api/ms2/(?<x>.*), /$\{x}
