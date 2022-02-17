@@ -7,29 +7,8 @@ spring:
     config:
       #enabled: true
       uri: http://localhost:8888
+      #uri: http://config-server:8888
       username: nttdata
       password: qwerty
 
-#RUTAS
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-      - id: ms1-customer
-        #uri: lb://service-customer
-        uri: http://localhost:8080
-        predicates:
-        - Path=/api/ms1/**
-        #localhost:8090/api/v1/customer -> asi buscará el api en eureka y resolverá en el ms customer.
-        filters:
-        - RewritePath=/api/ms1/(?<x>.*), /$\{x}
-      - id: ms2-profile
-        #uri: lb://service-profile
-        uri: http://localhost:8081
-        predicates:
-        - Path=/api/ms2/**
-        #localhost:8090/api/v1/typecustomer
-        #localhost:8090/api/v1/subtype
-        filters:
-        - RewritePath=/api/ms2/(?<x>.*), /$\{x}
+
