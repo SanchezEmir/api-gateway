@@ -1,6 +1,5 @@
-FROM amazoncorretto:11-alpine-jdk
+FROM adoptopenjdk/openjdk11:latest
 VOLUME /tmp
-EXPOSE 8090
 ARG JAR_FILE=target/api-gateway-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} api-gateway.jar
 ENV JAVA_OPTS=""
